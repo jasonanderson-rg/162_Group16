@@ -46,15 +46,6 @@ char Tool::getType()
 	return type;
 }
 /******************************************************************************************
-int Tool::halfStrength()
-Description: Returns a value that is half the tool's strength to compare when fighting.
-Returns: Half of the member variable strength as an int
-******************************************************************************************/
-int Tool::halfStrength()
-{
-	return strength / 2;
-}
-/******************************************************************************************
 int Tool::doubleStrength()
 Description: Returns a value that is double the tool's strength to compare when fighting.
 Returns: Double the member variable strength as an int
