@@ -41,15 +41,12 @@ int Paper::fight(Tool *opponent)
 	//If opponent is Scissors
 	if (opponent->getType() == 's')
 	{
-		//If half of this tool's strength is more than the opponents strength
-		//then this tool wins. Else if half this tool's strength is less than
-		//then the opponent's strength, the opponents wins.  If both of those
-		//are not true, then the strengths are equal and it is a tie
-		if (this->halfStrength() > opponent->getStrength())
+        //Compare tool strengths and return result
+		if (this->getStrength() > opponent->doubleStrength())
 		{
 			return 1;
 		}
-		else if (this->halfStrength() < opponent->getStrength())
+		else if (this->getStrength() < opponent->doubleStrength())
 		{
 			return 0;
 		}
@@ -61,10 +58,7 @@ int Paper::fight(Tool *opponent)
 	//If opponent is Rock
 	else if (opponent->getType() == 'r')
 	{
-		//If double this tool's strength is more than the opponents strength
-		//then this tool wins. Else if double this tool's strength is less than
-		//then the opponent's strength, the opponents wins.  If both of those
-		//are not true, then the strengths are equal and it is a tie
+        //Compare tool strengths and return result
 		if (this->doubleStrength() > opponent->getStrength())
 		{
 			return 1;
@@ -81,10 +75,7 @@ int Paper::fight(Tool *opponent)
 	//If opponent is also Paper
 	else if (opponent->getType() == 'p')
 	{
-		//If this tool's strength is more than the opponents strength
-		//then this tool wins. Else if this tool's strength is less than
-		//then the opponent's strength, the opponents wins.  If both of those
-		//are not true, then the strengths are equal and it is a tie
+        //Compare tool strengths and return result
 		if (this->getStrength() > opponent->getStrength())
 		{
 			return 1;
