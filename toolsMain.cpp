@@ -18,6 +18,8 @@ void testFight(Tool* player, Tool* computer)
 	std::cout << " Result: " << player->fight(computer) << std::endl;
 	delete player;
 	delete computer;
+	player = nullptr;
+	computer = nullptr;
 }
 
 
@@ -31,7 +33,31 @@ int main()
 
 	Tool* p = nullptr;
 	Tool* c = nullptr;
+
 	
+	std::cout << "Testing seems to work, but notice for the two calls below, even though ";
+	std::cout << "the rock and scissors have the same strength in both instances ";
+	std::cout << "(3 for rock and 1 for scissors), we get different results based on which ";
+	std::cout << "object calls the fight() function and which object is passed to the fight ";
+	std::cout << "function(). The issue arises because Tool.halfStrength() performs division on an odd integer.\n";
+	p = new Rock(3);
+	c = new Scissors;
+	testFight(p, c);
+	p = new Rock(3);
+	c = new Scissors;
+	testFight(c, p);
+	std::cout << std::endl;
+
+	std::cout << "Same issue here, but strength 1 for rock and 3 for scissors\n";
+	p = new Rock;
+	c = new Scissors(3);
+	testFight(p, c);
+	p = new Rock;
+	c = new Scissors(3);
+	testFight(c, p);
+	std::cout << std::endl;
+	
+	std::cout << "Start of normal testing:\n";
 	p = new Rock;
 	c = new Rock;
 	testFight(p, c);	
