@@ -22,7 +22,6 @@ class Tool
 	public:
 		int getStrength(); //returns the strength member variable
 		char getType(); //returns the type member variable
-		int halfStrength(); //returns a value that is half the tool's strength to compare when fighting.
 		int doubleStrength(); //returns value that is double the tool's strength to compare when fighting
 		Tool(); //default constructor that sets strength to 1
 		Tool(int setStrength); // overloaded constructor sets strength member equal to the parameter strength
