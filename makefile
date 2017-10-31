@@ -10,11 +10,11 @@ CXXFLAGS = -std=c++0x
 #CXXFLAGS += -g
 
 SRCS = toolsMain.cpp
-SRCS += Tool.hpp Tool.cpp 
+SRCS = Tool.hpp Tool.cpp 
 SRCS += Rock.hpp Rock.cpp
 SRCS += Paper.hpp Paper.cpp  
 SRCS += Scissors.hpp Scissors.cpp
-
+SRCS += RPSGame.cpp RPSGame.hpp
 
 
 projGroup: ${SRCS} 
@@ -25,3 +25,4 @@ clean:
 
 zip: 
 	zip -D GroupProject_Group_16.zip ${SRCS} makefile
+

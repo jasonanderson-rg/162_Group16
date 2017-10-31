@@ -92,7 +92,7 @@ void RPSGame::game()
 {
 	while (userChoice())
 	{
-		computerChoice();
+		compChoice = computerChoice(4);//recusive call to computer choice
 		displayComputerTool();
 		analyzeResults();
 		displayResults();
@@ -100,6 +100,129 @@ void RPSGame::game()
 		humanChoicesHistory.push_back(humanChoice);
 	}
 }
+
+
+/******************************************************************************************
+ * std::vector<char> makeVect(int checkSize, int start)
+ * Description: This function will return a vector of chars representing the type of tool 
+ * 	the user chose. The checkSize parameter will determine how large of a vector will 
+ * 	be returned, and the start parameter determines where in humanChoices the vector 
+ * 	will start from. 
+ * ***************************************************************************************/
+std::vector<char> RPSGame::makeVect(int checkSize, int start)
+{
+	std::vector<char> choices;
+	for (int i = 0; i < checkSize; i++)
+	{
+		choices.push_back(humanChoicesHistory[start - i]->getType());
+	}
+	return choices;
+}
+
+
+/******************************************************************************************
+ * bool equalVects(std::vector<char> search, std::vector<char> compare, int checkSize)
+ * Description: This functio will take two vectors as parameters as well as a size. The vectors
+ * 	are compared and if they are equal this function returns true. 
+ * ***************************************************************************************/
+bool RPSGame::equalVects(std::vector<char> search, std::vector<char> compare, int checkSize)
+{
+	for (int i = 0; i < checkSize; i++)
+	{
+		if (search[i] != compare[i])
+			return false;
+	}
+	return true;
+}
+
+/****************************************************************************************
+ * Tool * randomChoice()
+ * Description: returns random computer choice when there is not enough data to make a 
+ * 	"Smart" Choice.
+ * *************************************************************************************/
+Tool * RPSGame::randomChoice()
+{
+	int randChoice = rand() % 3 + 1;
+	if (randChoice == 1)
+	{
+		return new Rock(rockStrength);
+	}
+	else if (randChoice == 2)
+	{
+		return new Paper(paperStrength);
+	}
+	else 
+	{
+		return new Scissors(scissorStrength);
+	}
+}
+
+
+/****************************************************************************************
+ * Tool * analyzeMatches(std::vector<char> matches)
+ * Description: This function will look through a vector and determine the most frequent 
+ * 	choice, then return a tool pointer to the tool that will beat that choice. 
+ * **************************************************************************************/
+Tool * RPSGame::analyzeMatches(std::vector<char> matches)
+{
+	int r = 0;
+	int p = 0;
+	int s = 0;
+	int size = matches.size();
+	for (int i = 0; i < size; i++)
+	{
+		if (matches[i] == 'r')
+			r++;	
+		else if (matches[i] == 'p')
+			p++;
+		else
+			s++;
+	}
+		
+}
+
+
+/*****************************************************************************************
+ * computerChoice(int checkSize) 
+ * Description: This function will return a pointer to a tool that is the computers 
+ * 	choice. This is based on the history of the human choices, or is pseudorandom, if 
+ * 	there is not enough data. 
+ * **************************************************************************************/
+
+Tool * RPSGame::computerChoice(int checkSize)
+{
+	
+	int checkStart = humanChoicesHistory.size();
+	int checkEnd = checkStart - checkSize;
+	
+	if (checkSize < 2 || checkSize >= checkStart) // if checksize is 1 or if the checkSize is >= Vector do a random choice
+		return randomChoice();
+	std::vector<char> search = makeVect(checkSize, checkStart);
+
+	std::vector<char> results;	//vector to hold matches
+	while (checkEnd >= 0)
+	{
+		checkStart--;	//each iteration move start and end back to check the next piece of humanChoicesHistory
+		checkEnd--;
+		std::vector<char> compare = makeVect(checkSize, checkStart); //get compare vectory from HCH
+		if (equalVects(search, compare, checkSize))
+		{
+			results.push_back(humanChoicesHistory[checkStart + 1]->getType());//if match add the type directly befor match.
+		}
+	}
+	if (!results.empty()) //if results is not empty
+	{
+		return nullptr; //TODO: function to search results and pass a pointer to tool that is most frequent
+	}
+	else
+	{
+		return computerChoice(checkSize - 1);
+	}
+
+
+}
+
+
 
 
 

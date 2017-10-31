@@ -10,6 +10,9 @@
 #define RPSGAME_HPP
 
 #include "Tool.hpp"
+#include "Rock.hpp"
+#include "Paper.hpp"
+#include "Scissors.hpp"
 #include <vector>
 #include <iostream>
 #include <string>
@@ -36,6 +39,12 @@ public:
 	void computerChoice();
 	int oneOptionMenu(std::string a); //One option menu with positive integer input validation
 	int validatePositive(); //Validate a user's input is a positive integer
+	std::vector<char> makeVect(int checkSize, int start); //returns vectors to compare human choice patterns
+	bool equalVects(std::vector<char> search, std::vector<char> compare, int checkSize);//true if vectors equal
+	Tool * computerChoice(int checkSize); //returns the choice that the computer wants to make
+	Tool * randomChoice(); //returns a random tool pointer when there is not enough data
+	Tool * analyzeMatches(std::vector<char> matches); //finds most frequent match and returns pointer
+
 };
 
 
