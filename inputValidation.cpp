@@ -45,7 +45,46 @@ char stringValidation(std::string message)
     char output = input[0];
     return output;
 
-}   
+}
+
+
+/*****************************
+** Description: Validates string input as either 'y' or 'n'.
+*****************************/
+char ynValidation(std::string message)
+{
+    bool isValid = false;
+    std::string input;
+
+    while(!(isValid))
+    {
+        std::cout << message << std::endl;
+        std::getline (std::cin,input); 
+        int total;
+        for(int i = 0; i < input.size(); i++)
+        {   
+            total += input[i];
+            if ((tolower(input[i]) == 121) || (tolower(input[i]) == 110)) 
+            {
+                isValid = true;
+            } 
+            else if (total > 121)
+            {
+                isValid = false;
+                std::cout << "Invalid input: Please enter y for yes or n for no." << std::endl;
+            }  
+            else
+            {
+                isValid = false;
+                std::cout << "Invalid input: Please enter y for yes or n for no." << std::endl;
+            }  
+        }
+    }
+    char output = input[0];
+    return output;
+
+}
+
 
 
 int main()
