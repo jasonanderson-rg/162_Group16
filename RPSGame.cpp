@@ -10,6 +10,77 @@
 
 
 /******************************************************************************************
+RPSGame::RPSGame()
+Description: This constructor initializes the data members to a default value, with the
+ exception of humanChoice and compChoice.
+******************************************************************************************/
+RPSGame::RPSGame()
+{
+	this->humanChoicesHistory = {};
+	this->humanWins = 0;
+	this->computerWins = 0;
+	this->ties = 0;
+	this->paperStrength = 0;
+	this->scissorStrength = 0;
+	this->rockStrength = 0;
+}
+
+
+/******************************************************************************************
+RPSGame::~RPSGame()
+Description: This destructor frees up the memory allocated for the humanChoice and
+ compChoice data members.
+******************************************************************************************/
+RPSGame::~RPSGame()
+{
+	delete this->humanChoice;
+	delete this->compChoice;
+}
+
+
+/******************************************************************************************
+RPSGame::getHumanChoice()
+Description: Accessor function for humanChoice.
+******************************************************************************************/
+Tool* RPSGame::getHumanChoice()
+{
+	return this->humanChoice;
+}
+
+
+/******************************************************************************************
+RPSGame::setHumanChoice()
+Description: Mutator function for humanChoice.
+******************************************************************************************/
+void RPSGame::setHumanChoice(Tool* tool)
+{
+	delete this->humanChoice;
+	this->humanChoice = tool;
+}
+
+
+/******************************************************************************************
+RPSGame::getComputerChoice()
+Description: Accessor function for compChoice.
+******************************************************************************************/
+Tool* RPSGame::getComputerChoice()
+{
+	return this->compChoice;
+}
+
+
+/******************************************************************************************
+RPSGame::setComputerChoice()
+Description: Mutator function for compChoice.
+******************************************************************************************/
+void RPSGame::setComputerChoice(Tool* tool)
+{
+	delete this->compChoice;
+	this->compChoice = tool;
+}
+
+
+/******************************************************************************************
 RPSGame::setToolStrengths()
 Description: Default constructor that sets member variable type to 'r' and member
 variable strength to 1
@@ -92,13 +163,40 @@ void RPSGame::game()
 {
 	while (userChoice())
 	{
-		compChoice = computerChoice(4);//recusive call to computer choice
+		compChoice = computerChoice(4); //recusive call to computer choice
 		displayComputerTool();
 		analyzeResults();
 		displayResults();
 		delete compChoice;
 		humanChoicesHistory.push_back(humanChoice);
 	}
+}
+
+
+/******************************************************************************************
+RPSGame::userChoice()
+Description: Gets input from the user for their RPS choice. Returns true if user chooses
+ to continue playing and false otherwise.
+******************************************************************************************/
+bool userChoice()
+{
+	auto choice = stringValidation("Choose your tool (r-rock, p-paper, s-scissor, e-exit): ");
+	switch (choice) {
+		case 'r':
+			setHumanChoice(new Rock());
+			this->humanChoicesHistory.push_back(getHumanChoice());
+			return true;
+		case 'p':
+			setHumanChoice(new Paper());
+			this->humanChoicesHistory.push_back(getHumanChoice());
+			return true;
+		case 's':
+			setHumanChoice(new Scissors());
+			this->humanChoicesHistory.push_back(getHumanChoice());
+			return true;
+		default: break;
+	}
+	return false;
 }
 
 
