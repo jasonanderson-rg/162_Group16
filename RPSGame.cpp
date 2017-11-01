@@ -20,9 +20,9 @@ RPSGame::RPSGame()
 	this->humanWins = 0;
 	this->computerWins = 0;
 	this->ties = 0;
-	this->paperStrength = 0;
-	this->scissorStrength = 0;
-	this->rockStrength = 0;
+	this->paperStrength = 1;
+	this->scissorStrength = 1;
+	this->rockStrength = 1;
 }
 
 
