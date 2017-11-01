@@ -87,8 +87,8 @@ char ynValidation(std::string message)
 
 
 
-int main()
+/*int main()
 {
     char choice = stringValidation("Please choose your class.\nPress \"r\" for Rock\nPress \"p\" for Paper\nPress \"s\" for Scissors\n");
     std::cout << choice << std::endl;
-}
+}*/
