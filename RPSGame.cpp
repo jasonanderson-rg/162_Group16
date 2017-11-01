@@ -161,6 +161,11 @@ Description: Plays the game until the user decides to quit
 
 void RPSGame::game()
 {
+	auto choice = stringValidation("Welcome to Rock, Paper, Scissors! Do you want to choose different strengths for the tools? (y-yes, n-no): ");
+	if (choice == 'y') {
+		setToolStrengths();
+	}
+	
 	while (userChoice())
 	{
 		compChoice = computerChoice(4); //recusive call to computer choice
@@ -183,15 +188,12 @@ bool userChoice()
 	auto choice = stringValidation("Choose your tool (r-rock, p-paper, s-scissor, e-exit): ");
 	switch (choice) {
 		case 'r':
-			rockStrength = oneOptionMenu("What will be rock's strength? ");
 			setHumanChoice(new Rock(rockStrength));
 			return true;
 		case 'p':
-			paperStrength = oneOptionMenu("What will be paper's strength? ");
 			setHumanChoice(new Paper(paperStrength));
 			return true;
 		case 's':
-			scissorStrength = oneOptionMenu("What will be scissor's strength? ");
 			setHumanChoice(new Scissors(scissorStrength));
 			return true;
 		default: break;
