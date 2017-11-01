@@ -22,7 +22,7 @@ char stringValidation(std::string message)
     {
         std::cout << message << std::endl;
         std::getline (std::cin,input); 
-        int total;
+        int total = 0;
         for(int i = 0; i < input.size(); i++)
         {   
             total += input[i];
@@ -60,7 +60,7 @@ char ynValidation(std::string message)
     {
         std::cout << message << std::endl;
         std::getline (std::cin,input); 
-        int total;
+        int total = 0;
         for(int i = 0; i < input.size(); i++)
         {   
             total += input[i];
