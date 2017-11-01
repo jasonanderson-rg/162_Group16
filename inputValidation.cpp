@@ -21,8 +21,14 @@ char stringValidation(std::string message)
     while(!(isValid))
     {
         std::cout << message << std::endl;
-        std::getline (std::cin,input); 
-        int total = 0;
+        std::getline (std::cin,input);
+        
+        if (input.size() == 1) {
+            if (tolower(input[0]) == 'r' || tolower(input[0]) == 'p' || tolower(input[0])  == 's' || tolower(input[0] == 'e') {
+                isValid = true;
+            }
+        }
+        /*int total = 0;
         for(int i = 0; i < input.size(); i++)
         {   
             total += input[i];
@@ -40,7 +46,7 @@ char stringValidation(std::string message)
                 isValid = false;
                 std::cout << "Invalid input: Please enter r for rock, p for paper, s for scissors, or e for exit." << std::endl;
             }  
-        }
+        }*/
     }
     char output = input[0];
     return output;
