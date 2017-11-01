@@ -24,10 +24,15 @@ char stringValidation(std::string message)
         std::getline (std::cin,input);
         
         if (input.size() == 1) {
-            if (tolower(input[0]) == 'r' || tolower(input[0]) == 'p' || tolower(input[0])  == 's' || tolower(input[0] == 'e')) {
+            if (tolower(input[0]) == 'r' || tolower(input[0]) == 'p' || tolower(input[0])  == 's' || tolower(input[0]) == 'e') {
                 isValid = true;
             }
         }
+              
+        if (!isValid) {
+            std::cout << "Invalid input: Please enter r for rock, p for paper, s for scissors, or e for exit." << std::endl;
+        }
+        
         /*int total = 0;
         for(int i = 0; i < input.size(); i++)
         {   
@@ -66,7 +71,19 @@ char ynValidation(std::string message)
     {
         std::cout << message << std::endl;
         std::getline (std::cin,input); 
-        int total = 0;
+        
+        if (input.size() == 1) {
+            if (tolower(input[0]) == 'y' || tolower(input[0]) == 'n') {
+                isValid = true;
+            }
+        }
+        
+        if (!isValid) {
+            std::cout << "Invalid input: Please enter y for yes or n for no." << std::endl;
+        }
+        
+        
+        /*int total = 0;
         for(int i = 0; i < input.size(); i++)
         {   
             total += input[i];
@@ -84,7 +101,7 @@ char ynValidation(std::string message)
                 isValid = false;
                 std::cout << "Invalid input: Please enter y for yes or n for no." << std::endl;
             }  
-        }
+        }*/
     }
     char output = input[0];
     return output;
