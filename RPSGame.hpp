@@ -19,6 +19,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
+#include <stdlib.h>
 
 class RPSGame
 {
@@ -47,7 +48,6 @@ public:
 	bool userChoice(); // Lets the user choose which tool to play or whether to quit
 	void computerChoice();
 	int oneOptionMenu(std::string a); //One option menu with positive integer input validation
-	int validatePositive(); //Validate a user's input is a positive integer
 	std::vector<char> makeVect(int checkSize, int start); //returns vectors to compare human choice patterns
 	bool equalVects(std::vector<char> search, std::vector<char> compare, int checkSize);//true if vectors equal
 	Tool * computerChoice(int checkSize); //returns the choice that the computer wants to make
