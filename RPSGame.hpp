@@ -30,6 +30,12 @@ private:
 	int scissorStrength;
 	int rockStrength;
 public:
+	RPSGame();
+	~RPSGame();
+	Tool* getHumanChoice();
+	void setHumanChoice(Tool* tool);
+	Tool* getComputerChoice();
+	void setComputerChoice(Tool* tool);
 	void setToolStrengths(); // Have the user set the strengths for each tool
 	void displayComputerTool(); // Display the computer's choice
 	void analyzeResults(); //Determine whether the player or computer won and display the winner of the round
