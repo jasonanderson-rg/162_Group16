@@ -9,6 +9,7 @@
 #ifndef RPSGAME_HPP
 #define RPSGAME_HPP
 
+#include "inputValidation.hpp"
 #include "Tool.hpp"
 #include "Rock.hpp"
 #include "Paper.hpp"
