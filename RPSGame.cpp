@@ -183,16 +183,16 @@ bool userChoice()
 	auto choice = stringValidation("Choose your tool (r-rock, p-paper, s-scissor, e-exit): ");
 	switch (choice) {
 		case 'r':
-			setHumanChoice(new Rock());
-			this->humanChoicesHistory.push_back(getHumanChoice());
+			rockStrength = oneOptionMenu("What will be rock's strength? ");
+			setHumanChoice(new Rock(rockStrength));
 			return true;
 		case 'p':
-			setHumanChoice(new Paper());
-			this->humanChoicesHistory.push_back(getHumanChoice());
+			paperStrength = oneOptionMenu("What will be paper's strength? ");
+			setHumanChoice(new Paper(paperStrength));
 			return true;
 		case 's':
-			setHumanChoice(new Scissors());
-			this->humanChoicesHistory.push_back(getHumanChoice());
+			scissorStrength = oneOptionMenu("What will be scissor's strength? ");
+			setHumanChoice(new Scissors(scissorStrength));
 			return true;
 		default: break;
 	}
