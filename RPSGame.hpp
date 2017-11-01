@@ -16,6 +16,8 @@
 #include "Scissors.hpp"
 #include <vector>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <string>
 
 class RPSGame
@@ -51,7 +53,8 @@ public:
 	Tool * computerChoice(int checkSize); //returns the choice that the computer wants to make
 	Tool * randomChoice(); //returns a random tool pointer when there is not enough data
 	Tool * analyzeMatches(std::vector<char> matches); //finds most frequent match and returns pointer
-
+	bool greaterThan(int a, int b); //true if a is greater than b
+	bool equalTo(int a, int b); //true if a is equal to b
 };
 
 

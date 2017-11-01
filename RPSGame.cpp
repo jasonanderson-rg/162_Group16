@@ -23,6 +23,8 @@ RPSGame::RPSGame()
 	this->paperStrength = 1;
 	this->scissorStrength = 1;
 	this->rockStrength = 1;
+	humanChoice = nullptr;
+	compChoice = nullptr;
 }
 
 
@@ -35,6 +37,12 @@ RPSGame::~RPSGame()
 {
 	delete this->humanChoice;
 	delete this->compChoice;
+
+	int size = humanChoicesHistory.size();
+	for (int i = 0; i < size; i++)
+	{	
+		delete humanChoicesHistory[i];
+	}
 }
 
 
@@ -54,7 +62,10 @@ Description: Mutator function for humanChoice.
 ******************************************************************************************/
 void RPSGame::setHumanChoice(Tool* tool)
 {
-	delete this->humanChoice;
+	//if (humanChoice != nullptr)
+	//{
+	//	delete this->humanChoice;
+	//}
 	this->humanChoice = tool;
 }
 
@@ -75,7 +86,10 @@ Description: Mutator function for compChoice.
 ******************************************************************************************/
 void RPSGame::setComputerChoice(Tool* tool)
 {
-	delete this->compChoice;
+	if (compChoice != nullptr)
+	{
+		delete this->compChoice;
+	}
 	this->compChoice = tool;
 }
 
@@ -173,6 +187,7 @@ void RPSGame::game()
 		analyzeResults();
 		displayResults();
 		delete compChoice;
+		compChoice = nullptr;
 		humanChoicesHistory.push_back(humanChoice);
 	}
 }
@@ -183,7 +198,7 @@ RPSGame::userChoice()
 Description: Gets input from the user for their RPS choice. Returns true if user chooses
  to continue playing and false otherwise.
 ******************************************************************************************/
-bool userChoice()
+bool RPSGame::userChoice()
 {
 	auto choice = stringValidation("Choose your tool (r-rock, p-paper, s-scissor, e-exit): ");
 	switch (choice) {
@@ -235,6 +250,7 @@ bool RPSGame::equalVects(std::vector<char> search, std::vector<char> compare, in
 	return true;
 }
 
+
 /****************************************************************************************
  * Tool * randomChoice()
  * Description: returns random computer choice when there is not enough data to make a 
@@ -269,6 +285,7 @@ Tool * RPSGame::analyzeMatches(std::vector<char> matches)
 	int p = 0;
 	int s = 0;
 	int size = matches.size();
+	//tally the frequencies
 	for (int i = 0; i < size; i++)
 	{
 		if (matches[i] == 'r')
@@ -278,7 +295,92 @@ Tool * RPSGame::analyzeMatches(std::vector<char> matches)
 		else
 			s++;
 	}
-		
+	int tieBreak = rand() % 2; //random tie breaker for if frequencies are the same.
+
+	//determine return value
+	if (greaterThan(r, p) && greaterThan(r, s)) // rock is most frequent computer thinks human will choose rock
+	{
+		return new Paper(paperStrength); //return paper since that beats rock
+	}
+	else if (greaterThan(p, r) && greaterThan(p, s)) //paper is most frequent computer thinks human will choose paper
+	{
+		return new Scissors(scissorStrength); // return scissors since that beats paper
+	}
+	else if (greaterThan(s, r) && greaterThan(s, p)) //Scissors is most frequent computer thinks human will choose scissors
+	{
+		return new Rock(rockStrength); //return rock since that beats scissors
+	}
+	else if (equalTo(r, p) && greaterThan(r, s)) //r and p are same but greater than s computer thinks human will choose r or p
+	{
+		if (tieBreak == 0)
+		{
+			return new Paper(paperStrength);
+		}
+		else
+		{
+			return new Scissors(scissorStrength);
+		}
+	}
+	else if (equalTo(p, s) && greaterThan(p, r)) //p and s are same but greater than r computer thinks human will choose p or s
+	{
+		if (tieBreak == 0)
+		{
+			return new Scissors(scissorStrength);
+		}
+		else
+		{
+			return new Rock(rockStrength);
+		}
+	}
+	else if (equalTo(s, r) && greaterThan(s, p)) // s and r are same but greater than p computer thinks human will choose s or r
+	{
+		if (tieBreak == 0)
+		{
+			return new Rock(rockStrength);
+		}
+		else
+		{
+			return new Paper(paperStrength);
+		}
+	}
+	else // all tools have same frequency
+	{
+		return randomChoice();
+	}
+}
+
+
+/************************************************************************************************************
+ * bool greaterThan(int a, int b)
+ * Description: helper function for analyze mataches. Returns true if a is greater than b.
+ * *********************************************************************************************************/
+bool RPSGame::greaterThan(int a, int b)
+{
+	if (a > b)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+/************************************************************************************************************
+ * bool equalTo(int a, int b)
+ * Description: Helper function for analyzeMatches. Returns true if a and b are equal.
+ * *********************************************************************************************************/
+bool RPSGame::equalTo(int a, int b)
+{
+	if (a == b)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
 }
 
 
@@ -288,11 +390,10 @@ Tool * RPSGame::analyzeMatches(std::vector<char> matches)
  * 	choice. This is based on the history of the human choices, or is pseudorandom, if 
  * 	there is not enough data. 
  * **************************************************************************************/
-
 Tool * RPSGame::computerChoice(int checkSize)
 {
 	
-	int checkStart = humanChoicesHistory.size();
+	int checkStart = humanChoicesHistory.size() - 1; // need to start at the last position of the vector. 
 	int checkEnd = checkStart - checkSize;
 	
 	if (checkSize < 2 || checkSize >= checkStart) // if checksize is 1 or if the checkSize is >= Vector do a random choice
@@ -312,7 +413,7 @@ Tool * RPSGame::computerChoice(int checkSize)
 	}
 	if (!results.empty()) //if results is not empty
 	{
-		return nullptr; //TODO: function to search results and pass a pointer to tool that is most frequent
+		return analyzeMatches(results);// function to search results and pass a pointer to tool that is most frequent
 	}
 	else
 	{
@@ -321,9 +422,6 @@ Tool * RPSGame::computerChoice(int checkSize)
 
 
 }
-
-
-
 
 
 //One option menu with positive integer input validation

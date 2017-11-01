@@ -7,15 +7,15 @@ CXX = g++
 CXXFLAGS = -std=c++0x
 #CXXFLAGS += -Wall
 #CXXFLAGS += -pedantic-errors
-#CXXFLAGS += -g
+CXXFLAGS += -g
 
-SRCS = toolsMain.cpp
-SRCS = Tool.hpp Tool.cpp 
+SRCS = play_game.cpp
+SRCS += Tool.hpp Tool.cpp 
 SRCS += Rock.hpp Rock.cpp
 SRCS += Paper.hpp Paper.cpp  
 SRCS += Scissors.hpp Scissors.cpp
 SRCS += RPSGame.cpp RPSGame.hpp
-
+SRCS += inputValidation.cpp inputValidation.hpp
 
 projGroup: ${SRCS} 
 	${CXX} ${CXXFLAGS} ${SRCS} -o projGroup
