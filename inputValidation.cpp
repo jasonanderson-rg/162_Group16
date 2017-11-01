@@ -24,7 +24,7 @@ char stringValidation(std::string message)
         std::getline (std::cin,input);
         
         if (input.size() == 1) {
-            if (tolower(input[0]) == 'r' || tolower(input[0]) == 'p' || tolower(input[0])  == 's' || tolower(input[0] == 'e') {
+            if (tolower(input[0]) == 'r' || tolower(input[0]) == 'p' || tolower(input[0])  == 's' || tolower(input[0] == 'e')) {
                 isValid = true;
             }
         }
