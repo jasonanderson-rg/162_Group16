@@ -161,7 +161,7 @@ Description: Plays the game until the user decides to quit
 
 void RPSGame::game()
 {
-	auto choice = stringValidation("Welcome to Rock, Paper, Scissors! Do you want to choose different strengths for the tools? (y-yes, n-no): ");
+	char choice = ynValidation("Welcome to Rock, Paper, Scissors! Do you want to choose different strengths for the tools? (y-yes, n-no): ");
 	if (choice == 'y') {
 		setToolStrengths();
 	}
