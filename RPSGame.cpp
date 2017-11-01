@@ -62,10 +62,6 @@ Description: Mutator function for humanChoice.
 ******************************************************************************************/
 void RPSGame::setHumanChoice(Tool* tool)
 {
-	//if (humanChoice != nullptr)
-	//{
-	//	delete this->humanChoice;
-	//}
 	this->humanChoice = tool;
 }
 
