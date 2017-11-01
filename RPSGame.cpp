@@ -35,8 +35,15 @@ Description: This destructor frees up the memory allocated for the humanChoice a
 ******************************************************************************************/
 RPSGame::~RPSGame()
 {
-	delete this->humanChoice;
-	delete this->compChoice;
+	
+	if (humanChoice != nullptr)
+	{
+		delete this->humanChoice;
+	}
+	if (compChoice != nullptr)
+	{
+		delete this->compChoice;
+	}
 
 	int size = humanChoicesHistory.size();
 	for (int i = 0; i < size; i++)
