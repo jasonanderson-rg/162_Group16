@@ -26,19 +26,19 @@ char stringValidation(std::string message)
         for(int i = 0; i < input.size(); i++)
         {   
             total += input[i];
-            if ((tolower(input[i]) == 114) || (tolower(input[i]) == 112) || (tolower(input[i]) == 115)) 
+            if ((tolower(input[i]) == 114) || (tolower(input[i]) == 112) || (tolower(input[i]) == 115) || (tolower(input[i]) == 101)) 
             {
                 isValid = true;
             } 
             else if (total > 115)
             {
                 isValid = false;
-                std::cout << "Invalid input: Please enter r for rock, p for paper, or s for scissors." << std::endl;
+                std::cout << "Invalid input: Please enter r for rock, p for paper, s for scissors, or e for exit." << std::endl;
             }  
             else
             {
                 isValid = false;
-                std::cout << "Invalid input: Please enter r for rock, p for paper, or s for scissors." << std::endl;
+                std::cout << "Invalid input: Please enter r for rock, p for paper, s for scissors, or e for exit." << std::endl;
             }  
         }
     }
